@@ -10,47 +10,31 @@ import HTML from '../assets/html.png'
 import { useState } from "react";
 
 
-const headStyle = {
-	background: '#1d1e22',
-	padding: '9px 12px',
-	display: 'flex',
-  };
-
-const headerStyle = {
-	display: 'flex',
-	justifyContent: 'space-between',
-	background: '#060606',
-	color: '#aaaebc',
-	fontWeight: 700,
-  };
-
 const containerStyle = {
 	flexGrow: 1,
 	flexBasis: 0,
 	display: 'flex',
 	flexDirection: 'column',
 	padding: '0 8px 8px',
-  };
+};
 
 function Editor({ heading, language, value, onChange, icon, color }) {
+	const [open, setOpen] = useState(true);
 
 	const handleChange = (editor, data, value) => {
 		onChange(value);
 	};
 	return (
-		<div style={containerStyle}>
-			<div style={headerStyle}>
-				<div style={headStyle}>
-					<img src={icon} style={{
-							marginRight: 5,
-							height: 20,
-							width: 20,
-							display: "flex",
-							placeContent: "center",
-							paddingBottom: 2,
-						}}/>
-					{heading}
-				</div>
+		<div style={{
+			flexGrow: open ? 1: 0,
+			flexBasis: 0,
+			display: 'flex',
+			flexDirection: 'column',
+			padding: '0 8px 8px'}}>
+			<div style={{display:'flex',alignItems:'center',justifyContent:'center',padding:'5px',background:'#1d1e22',borderBottom:'1px solid black'}}>
+				<img src={icon} style={{height: 30,width: 30}}/>
+				<span style={{fontSize:'20px',paddingLeft:'5px', color:"white"}}>{heading}</span>
+				<span style={{fontSize:'20px',paddingLeft:'5px', color:"white"}} onClick={() => setOpen((prevState) => !prevState)}>dd</span>
 			</div>
 			<ControlledEditor
 				onBeforeChange={handleChange}
